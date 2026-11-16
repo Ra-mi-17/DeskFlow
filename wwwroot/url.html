@@ -1,0 +1,51 @@
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8">
+  <title>動画URLを追加 - DeskFlow</title>
+  <link rel="stylesheet" href="ui.css">
+  <style>
+    body { padding: 18px 20px; gap: 10px; }
+    h1 { margin: 0; font-size: 16px; }
+    .hint { margin: 0; color: var(--muted); font-size: 12px; }
+    textarea { flex: 1; min-height: 120px; font-family: Consolas, "Cascadia Mono", monospace; font-size: 12.5px; }
+    .row { display: flex; align-items: center; justify-content: space-between; gap: 10px; }
+    label { display: flex; align-items: center; gap: 6px; color: var(--muted); cursor: pointer; }
+    label input { accent-color: var(--accent); }
+    .btns { display: flex; gap: 8px; }
+  </style>
+</head>
+<body>
+  <h1>動画URLを追加</h1>
+  <p class="hint">YouTube（通常・Shorts・ライブ）／ Vimeo ／ .mp4・.webm などの直接リンクに対応。1行に1つずつ書けば複数まとめて追加できます。<br>その他のサイトは <b>yt-dlp</b> がインストールされていれば再生できます。</p>
+  <textarea id="urls" placeholder="https://www.youtube.com/watch?v=..." spellcheck="false"></textarea>
+  <div class="row">
+    <label><input type="checkbox" id="playnow" checked> 追加したらすぐ再生する</label>
+    <div class="btns">
+      <button id="cancel">キャンセル</button>
+      <button id="ok" class="primary">追加（Enter）</button>
+    </div>
+  </div>
+  <script src="bridge.js"></script>
+  <script>
+    'use strict';
+    const ta = document.getElementById('urls');
+    const submit = () => {
+      const text = ta.value.trim();
+      if (!text) { ta.focus(); return; }
+      deskflow.send('cmd', { action: 'addUrls', value: { text, playNow: document.getElementById('playnow').checked } });
+      deskflow.send('close-window');
+    };
+    document.getElementById('ok').onclick = submit;
+    document.getElementById('cancel').onclick = () => deskflow.send('close-window');
+    ta.addEventListener('keydown', (e) => {
+      if (e.key === 'Enter' && !e.shiftKey) { e.preventDefault(); submit(); }
+    });
+    document.addEventListener('keydown', (e) => { if (e.key === 'Escape') deskflow.send('close-window'); });
+    deskflow.invoke('clipboard-text').then((t) => {
+      if (t && /^\s*https?:\/\/\S+\s*$/m.test(t) && !ta.value) { ta.value = t.trim(); ta.select(); }
+    }).catch(() => {});
+    ta.focus();
+  </script>
+</body>
+</html>

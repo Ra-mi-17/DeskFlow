@@ -1,0 +1,47 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>WinExe</OutputType>
+    <TargetFramework>net8.0-windows</TargetFramework>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>disable</ImplicitUsings>
+    <UseWPF>true</UseWPF>
+    <UseWindowsForms>true</UseWindowsForms>
+    <AssemblyName>DeskFlow</AssemblyName>
+    <RootNamespace>DeskFlow</RootNamespace>
+    <Version>1.0.0</Version>
+    <Product>DeskFlow</Product>
+    <Description>デスクトップ動画プレーヤー</Description>
+    <Copyright>Copyright (c) 2026 DeskFlow の作者. All rights reserved.</Copyright>
+    <ApplicationIcon>assets\icon.ico</ApplicationIcon>
+    <SatelliteResourceLanguages>ja;en</SatelliteResourceLanguages>
+    <GenerateDocumentationFile>false</GenerateDocumentationFile>
+  </PropertyGroup>
+
+  <!--
+    通常のビルドは exe ランチャーを作らず「dotnet DeskFlow.dll」で起動する（署名済みの dotnet.exe 経由なので
+    スマートアプリコントロールがオンでもランチャーは止められない）。
+    単一ファイル / 自己完結で publish するときだけ DeskFlow.exe を生成する。
+  -->
+  <PropertyGroup Condition="'$(SelfContained)' != 'true' and '$(PublishSingleFile)' != 'true'">
+    <UseAppHost>false</UseAppHost>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <FrameworkReference Include="Microsoft.AspNetCore.App" />
+    <PackageReference Include="Microsoft.Web.WebView2" Version="1.0.4314.35" />
+  </ItemGroup>
+
+  <!-- UI とアイコンは DLL / exe に埋め込む（単一ファイルでも外部ファイル不要） -->
+  <ItemGroup>
+    <EmbeddedResource Include="wwwroot\*" LogicalName="wwwroot/%(Filename)%(Extension)" />
+    <EmbeddedResource Include="assets\icon.ico" LogicalName="assets/icon.ico" />
+  </ItemGroup>
+
+  <!-- 配布用の説明書・ライセンス表記を publish フォルダーへコピー（exe には入れない） -->
+  <ItemGroup>
+    <None Include="dist\*" CopyToOutputDirectory="Never" CopyToPublishDirectory="PreserveNewest"
+          ExcludeFromSingleFile="true" Link="%(Filename)%(Extension)" />
+  </ItemGroup>
+
+</Project>

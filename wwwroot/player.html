@@ -1,0 +1,54 @@
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8">
+  <title>DeskFlow</title>
+  <link rel="stylesheet" href="player.css">
+</head>
+<body data-fit="cover">
+  <div id="stage">
+    <video id="video" class="layer off" playsinline preload="auto"></video>
+    <div id="yt-wrap" class="layer frame off"><div id="yt"></div></div>
+    <div id="vimeo-wrap" class="layer frame off"></div>
+
+    <div id="empty" class="layer">
+      <div class="empty-inner">
+        <div class="logo">Desk<span>Flow</span></div>
+        <p class="hint-window">右クリック →「動画ファイルを追加」「動画URLを追加」<br>または動画ファイルをここへドロップ / URL を Ctrl+V</p>
+        <p class="hint-wall">タスクトレイの DeskFlow アイコンから動画を追加できます</p>
+      </div>
+    </div>
+
+    <div id="dim" class="layer"></div>
+    <div id="shield" class="layer"></div>
+    <div id="edge"></div>
+    <div id="badge"></div>
+    <div id="loading"><div class="spinner"></div></div>
+    <div id="toast"></div>
+    <div id="drop-hint">ドロップして追加・再生</div>
+
+    <div id="controls">
+      <div id="seek"><div id="seek-fill"></div><div id="seek-knob"></div></div>
+      <div class="row">
+        <button id="btn-prev" title="前の動画 (P)"></button>
+        <button id="btn-play" class="big" title="再生 / 一時停止 (Space)"></button>
+        <button id="btn-next" title="次の動画 (N)"></button>
+        <button id="btn-mute" title="ミュート (M)"></button>
+        <input id="vol" type="range" min="0" max="100" step="1" title="音量">
+        <div id="meta"><div id="title"></div><div id="time"></div></div>
+        <button id="btn-list" title="プレイリスト"></button>
+        <button id="btn-menu" title="メニュー"></button>
+      </div>
+    </div>
+  </div>
+  <div id="grips">
+    <div class="grip e-t" data-edge="t"></div><div class="grip e-b" data-edge="b"></div>
+    <div class="grip e-l" data-edge="l"></div><div class="grip e-r" data-edge="r"></div>
+    <div class="grip e-tl" data-edge="tl"></div><div class="grip e-tr" data-edge="tr"></div>
+    <div class="grip e-bl" data-edge="bl"></div><div class="grip e-br" data-edge="br"></div>
+  </div>
+  <script src="bridge.js"></script>
+  <script src="icons.js"></script>
+  <script src="player.js"></script>
+</body>
+</html>

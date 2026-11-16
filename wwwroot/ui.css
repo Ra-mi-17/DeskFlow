@@ -1,0 +1,60 @@
+:root {
+  --bg: #15161c;
+  --panel: #1c1d25;
+  --panel2: #23242e;
+  --line: rgba(255, 255, 255, .08);
+  --fg: #eceef6;
+  --muted: #9a9db0;
+  --accent: #7c8cff;
+  --accent2: #36d1dc;
+  --danger: #ff6b81;
+  --radius: 10px;
+}
+
+* { box-sizing: border-box; }
+html, body {
+  margin: 0; height: 100%;
+  background: var(--bg); color: var(--fg);
+  font: 13px/1.45 "Segoe UI Variable Text", "Segoe UI", "Yu Gothic UI", Meiryo, sans-serif;
+}
+body { display: flex; flex-direction: column; overflow: hidden; }
+::-webkit-scrollbar { width: 10px; }
+::-webkit-scrollbar-thumb { background: rgba(255, 255, 255, .12); border-radius: 10px; border: 2px solid var(--bg); }
+
+.ic { width: 18px; height: 18px; flex: none; }
+
+button, .btn {
+  display: inline-flex; align-items: center; justify-content: center; gap: 6px;
+  height: 32px; padding: 0 12px; border: 1px solid var(--line); border-radius: 8px;
+  background: var(--panel2); color: var(--fg); font: inherit; cursor: pointer;
+  transition: background .12s, border-color .12s;
+}
+button:hover { background: #2c2e3a; }
+button:focus-visible, input:focus-visible, textarea:focus-visible { outline: 2px solid var(--accent); outline-offset: 1px; }
+button.primary { background: linear-gradient(135deg, var(--accent), #5b6cf0); border-color: transparent; color: #fff; font-weight: 600; }
+button.primary:hover { filter: brightness(1.08); }
+button.icon { width: 32px; padding: 0; }
+button.ghost { background: transparent; border-color: transparent; }
+button.ghost:hover { background: rgba(255, 255, 255, .08); }
+button.on { color: var(--accent2); background: rgba(54, 209, 220, .12); border-color: rgba(54, 209, 220, .3); }
+
+input[type="text"], textarea {
+  width: 100%; padding: 8px 10px; border-radius: 8px; border: 1px solid var(--line);
+  background: #101117; color: var(--fg); font: inherit; resize: none;
+}
+input::placeholder, textarea::placeholder { color: #6c6f82; }
+
+input[type="range"] {
+  -webkit-appearance: none; appearance: none; height: 4px; border-radius: 4px; cursor: pointer;
+  background: linear-gradient(to right, var(--accent) var(--p, 50%), rgba(255, 255, 255, .16) var(--p, 50%));
+}
+input[type="range"]::-webkit-slider-thumb { -webkit-appearance: none; width: 13px; height: 13px; border-radius: 50%; background: #fff; }
+
+#toast {
+  position: fixed; left: 50%; bottom: 84px; transform: translate(-50%, 8px);
+  padding: 8px 14px; border-radius: 10px; background: #2b2d3a; border: 1px solid var(--line);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, .35);
+  opacity: 0; pointer-events: none; transition: opacity .2s, transform .2s; z-index: 50;
+  max-width: calc(100% - 32px); white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+}
+#toast.show { opacity: 1; transform: translate(-50%, 0); }

@@ -1,0 +1,71 @@
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8">
+  <title>DeskFlow プレイリスト</title>
+  <link rel="stylesheet" href="ui.css">
+  <link rel="stylesheet" href="playlist.css">
+</head>
+<body>
+  <header>
+    <div class="brand">
+      <div class="name">Desk<span>Flow</span></div>
+      <div id="count" class="count"></div>
+    </div>
+    <div class="actions">
+      <button id="add-file" title="動画ファイルを追加"></button>
+      <button id="add-folder" title="フォルダ内の動画をまとめて追加"></button>
+      <div class="menu-wrap">
+        <button id="more" class="icon ghost" title="その他"></button>
+        <div id="more-menu" class="pop" hidden>
+          <button data-act="import">プレイリストを読み込み…</button>
+          <button data-act="export">プレイリストを書き出し…</button>
+          <button data-act="shortcuts">ショートカット一覧…</button>
+          <hr>
+          <button data-act="clear" class="danger">すべて削除</button>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <form id="url-form" autocomplete="off">
+    <span class="url-ic"></span>
+    <input id="url" type="text" placeholder="YouTube / Vimeo / 動画のURL を貼り付けて Enter">
+    <button id="url-add" class="primary" type="submit">追加</button>
+  </form>
+
+  <main id="scroller">
+    <ol id="list"></ol>
+    <div id="empty">
+      <p class="big">プレイリストは空です</p>
+      <p>上のボタンやURL欄から追加するか、<br>動画ファイル・フォルダをこのウィンドウへドロップしてください。</p>
+    </div>
+  </main>
+
+  <footer>
+    <div class="now">
+      <div class="now-label" id="now-label">再生中</div>
+      <div class="now-title" id="now-title">—</div>
+    </div>
+    <div class="transport">
+      <button id="shuffle" class="icon ghost" title="シャッフル"></button>
+      <button id="prev" class="icon ghost" title="前の動画"></button>
+      <button id="play" class="icon play" title="再生 / 一時停止"></button>
+      <button id="next" class="icon ghost" title="次の動画"></button>
+      <button id="repeat" class="icon ghost" title="ループ方法"></button>
+    </div>
+    <div class="volume">
+      <button id="mute" class="icon ghost" title="ミュート"></button>
+      <input id="vol" type="range" min="0" max="100" step="1">
+      <span id="vol-val">50</span>
+    </div>
+  </footer>
+
+  <div id="drop">動画ファイル・フォルダをドロップして追加</div>
+  <div id="toast"></div>
+
+  <script src="bridge.js"></script>
+  <script src="icons.js"></script>
+  <script src="playlist.js"></script>
+</body>
+</html>
