@@ -12,7 +12,17 @@ dotnet publish -p:PublishProfile=SingleFile
 このフォルダーをそのまま zip にして配布できます。.NET ランタイムと UI を同梱した自己完結型なので、
 この exe をコピーするだけで他の PC でも動きます（WebView2 ランタイムは Windows 11 に標準搭載）。
 
-## インストール・起動
+## インストーラー
+
+```powershell
+powershell -ExecutionPolicy Bypass -File scripts\build-installer.ps1
+```
+
+`publish\installer\DeskFlow-Setup-<version>.exe` ができます（バージョンは `DeskFlow.csproj` の `<Version>`）。
+必要なもの: [Inno Setup 6](https://jrsoftware.org/isinfo.php)（`winget install JRSoftware.InnoSetup`）。定義は `installer\DeskFlow.iss`。
+管理者権限なしで `%LOCALAPPDATA%\Programs\DeskFlow` にインストールされ、「設定」→「アプリ」からアンインストールできます。
+
+## 自分の PC へのインストール（開発用）
 
 ```powershell
 powershell -ExecutionPolicy Bypass -File scripts\install.ps1 -Run

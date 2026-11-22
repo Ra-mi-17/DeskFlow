@@ -1,4 +1,4 @@
-# Generates assets/icon.png (256x256) for DeskFlow.
+﻿# Generates assets/icon.png (256x256) for DeskFlow.
 Add-Type -AssemblyName System.Drawing
 $size = 256
 $bmp = New-Object System.Drawing.Bitmap $size, $size
