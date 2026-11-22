@@ -3,3 +3,6 @@ obj/
 publish/
 *.user
 .vs/
+
+# Claude Code ‚ÌŒÂlİ’è
+.claude/settings.local.json
