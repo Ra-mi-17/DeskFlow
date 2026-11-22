@@ -4,5 +4,5 @@ publish/
 *.user
 .vs/
 
-# Claude Code �̌l�ݒ�
+# Claude Code の個人設定
 .claude/settings.local.json
